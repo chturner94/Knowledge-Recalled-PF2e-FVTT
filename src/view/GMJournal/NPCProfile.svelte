@@ -1,31 +1,30 @@
 <script>
 import {setContext} from "svelte";
 import {TJSDocument} from "#runtime/svelte/store/fvtt/document";
+import {DynReducerHelper} from "@typhonjs-fvtt/runtime/svelte/store/reducer";
 
 
 
-let module = ui.knowledgeRecalled;
-let npcArray = module?.npcActors;
-let selectedNPC = npcArray ? npcArray[-1] : null;
-console.log("KnowledgeRecalled: ", module, npcArray, selectedNPC);
+// let module = ui.knowledgeRecalled;
+// let npcArray = module?.npcActors;
+// let selectedNPC = npcArray ? npcArray[-1] : null;
+// console.log("KnowledgeRecalled: ", module, npcArray, selectedNPC);
 
-const doc = TJSDocument;
+export let elementRoot;
+const NPCArray = ui.KnowledgeRecalled?.npcActors
+console.log("Knowledge Recalled: View Array", NPCArray);
 
- function updateSelectedActor(actor) {
-    selectedNPC = doc(actor).embed.get();
-    setContext('selectedNPC', selectedNPC);
- }
+// cycle through the array of NPCs with a selected NPC that is changed by a button
+
+// $ requires a store
+
 </script>
-<h1>Hello and Test</h1>
-
-      {#if $npcArray}-->
-         {#each $npcArray as npc}-->
-           <button on:click={() => updateSelectedActor(npc)}>{npc.name}</button>-->
-        {/each}-->
-
-        <h2> Selected Actor: {$selectedNPC.flags.name}</h2>-->
-           <p> Actor Data: {$selectedNPC.flags.defaultDC}</p>-->
-         {:else}
-           <p>No NPCs Found</p>
-      {/if}
-
+<main>
+   {#if NPCArray}
+      {#each NPCArray as npc}
+         <div class="npc">
+            <h2>{npc.flags.baseCharacterInfo.name}</h2>
+         </div>
+      {/each}
+   {/if}
+</main>
