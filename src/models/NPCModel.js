@@ -96,7 +96,7 @@ export default class NPCModel
             discoveredByPC: "",
          },
          immunities: this.ConvertNestedPropertiesOfArraysToVisibilityObject(actor.attributes.immunities, "type"),
-         resistance: this.ConvertNestedPropertiesOfArraysToVisibilityObject(actor.attributes.resistances, "type"),
+         resistances: this.ConvertNestedPropertiesOfArraysToVisibilityObject(actor.attributes.resistances, "type"),
          weaknesses: this.ConvertNestedPropertiesOfArraysToVisibilityObject(actor.attributes.weaknesses, "type"),
          passiveAbilities: [],
          actionAbilities: [],
