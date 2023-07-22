@@ -49,107 +49,122 @@ const NPCData = {
 <main>
    {#if NPCArray}
          <div class="npcProfileWrapper">
-            <div class="infoHeader">
-               <h2>{NPCData.baseInfo.name}</h2>
-               <!-- hard codded need to not hardcode -->
-               <ul class = "traitCards">
-                  {#each NPCData.traits as trait}
-                     <li>{trait.value}</li>
-                  {/each}
-                  {#if NPCData.baseInfo.creatureType}
-                     <li>{NPCData.baseInfo.creatureType}</li>
+            <div class="row">
+               <div class="infoHeader">
+                  <h2>{NPCData.baseInfo.name}</h2>
+                  <!-- hard codded need to not hardcode -->
+                  <ul class = "traitCards">
+                     {#each NPCData.traits as trait}
+                        <li>{trait.value}</li>
+                     {/each}
+                     {#if NPCData.baseInfo.creatureType}
+                        <li>{NPCData.baseInfo.creatureType}</li>
+                     {/if}
+                     {#if NPCData.baseInfo.size}
+                        <li>{NPCData.baseInfo.size}</li>
+                     {/if}
+                  </ul>
+               </div>
+               <div class="abilities-dmgIRW">
+                  {#if NPCData.actionAbilities.length > 0}
+                     <div class = "actionAbilityWrapper">
+                        <h3>Abilities</h3>
+                        <ul class = "abilityCard">
+                           {#each NPCData.actionAbilities as ability}
+                              <li>
+                                 <div class = "abilityCardHeader"> {ability.value} </div>
+                                 <div class = "abilityCardDescription"> <textarea> {ability.description} </textarea></div>
+                              </li>
+                           {/each}
+                        </ul>
+                     </div>
                   {/if}
-                  {#if NPCData.baseInfo.size}
-                     <li>{NPCData.baseInfo.size}</li>
+                  {#if NPCData.passiveAbilities.length > 0 }
+                     <div class = "passiveAbilityWrapper">
+                        <h3>Passive Abilities</h3>
+                        <ul class = "abilityCard">
+                           {#each NPCData.passiveAbilities as ability}
+                              <li>
+                                 <div class = "abilityCardHeader"> {ability.value} </div>
+                                 <div class = "abilityCardDescription"> <textarea> {ability.description} </textarea></div>
+                              </li>
+                           {/each}
+                        </ul>
+                     </div>
                   {/if}
-               </ul>
+                  {#if NPCData.attackAbilities.length > 0}
+                     <div class = "attackAbilityWrapper">
+                        <h3>Attacks</h3>
+                        <ul class = "abilityCard">
+                           {#each NPCData.attackAbilities as ability}
+                              <li>
+                                 <div class = "abilityCardHeader"> {ability.value} </div>
+                                 <div class = "abilityCardDescription"> <textarea> {ability.description} </textarea></div>
+                              </li>
+                           {/each}
+                        </ul>
+                     </div>
+                  {/if}
+                  {#if NPCData.spellAbilities.length > 0}
+                     <div class = "spellAbilityWrapper">
+                        <h3>Spells</h3>
+                        <ul class = "abilityCard">
+                           {#each NPCData.spellAbilities as ability}
+                              <li>
+                                 <div class = "abilityCardHeader"> {ability.value} </div>
+                                 <div class = "abilityCardDescription"> <textarea> {ability.description} </textarea></div>
+                              </li>
+                           {/each}
+                        </ul>
+                     </div>
+                  {/if}
+               </div>
             </div>
-            <div class="npcProfileImg">
-               <img src="{NPCData.baseInfo.img}" alt="NPC Image"/>
-            </div>
-            <div class="npcProfileSettings">
-               <h3>Profile Settings</h3>
-            </div>
-            <div class="abilities-dmgIRW">
-               {#if NPCData.actionAbilities.length > 0}
-                  <div class = "actionAbilityWrapper">
-                     <h3>Abilities</h3>
-                     <ul class = "abilityCard">
-                        {#each NPCData.actionAbilities as ability}
-                           <li>
-                              <div class = "abilityCardHeader"> {ability.value} </div>
-                              <div class = "abilityCardDescription"> <textarea> {ability.description} </textarea></div>
-                           </li>
-                        {/each}
-                     </ul>
-                  </div>
-               {/if}
-               {#if NPCData.passiveAbilities.length > 0 }
-                  <div class = "passiveAbilityWrapper">
-                     <h3>Passive Abilities</h3>
-                     <ul class = "abilityCard">
-                        {#each NPCData.passiveAbilities as ability}
-                           <li>
-                              <div class = "abilityCardHeader"> {ability.value} </div>
-                              <div class = "abilityCardDescription"> <textarea> {ability.description} </textarea></div>
-                           </li>
-                        {/each}
-                     </ul>
-                  </div>
-               {/if}
-               {#if NPCData.attackAbilities.length > 0}
-                  <div class = "attackAbilityWrapper">
-                     <h3>Attacks</h3>
-                     <ul class = "abilityCard">
-                        {#each NPCData.attackAbilities as ability}
-                           <li>
-                              <div class = "abilityCardHeader"> {ability.value} </div>
-                              <div class = "abilityCardDescription"> <textarea> {ability.description} </textarea></div>
-                           </li>
-                        {/each}
-                     </ul>
-                  </div>
-               {/if}
-               {#if NPCData.spellAbilities.length > 0}
-                  <div class = "spellAbilityWrapper">
-                     <h3>Spells</h3>
-                     <ul class = "abilityCard">
-                        {#each NPCData.spellAbilities as ability}
-                           <li>
-                              <div class = "abilityCardHeader"> {ability.value} </div>
-                              <div class = "abilityCardDescription"> <textarea> {ability.description} </textarea></div>
-                           </li>
-                        {/each}
-                     </ul>
-                  </div>
-               {/if}
+            <div class="row">
+               <div class="npcProfileImg">
+                  <img src="{NPCData.baseInfo.actorImg}" alt="NPC Image">
+               </div>
+               <div class="npcProfileOptionsWrapper">
+                  <h3>Recall Options</h3>
+                  <table class="npcProfileOptions">
+
+                  </table>
+               </div>
             </div>
          </div>
    {/if}
 </main>
 
-<style>
+<style lang="scss">
    .npcProfileWrapper {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      grid-template-rows: 1fr 1fr 1fr;
-      gap: 5px 5px;
-      grid-template-areas:
-         "infoHeader infoHeader npcProfileImg"
-         "abilities-dmgIRW abilities-dmgIRW npcProfileSettings"
-         "abilities-dmgIRW abilities-dmgIRW npcProfileSettings";
+      display: flex;
+      flex-direction: row;
+      column-gap: 10px;
+      flex-grow: 1;
+   }
+   .row {
+      display: flex;
+      width: 50%;
+      flex-direction: column;
+
    }
    .infoHeader {
-      grid-area: infoHeader;
+      min-height: 100px;
    }
    .npcProfileImg {
-      grid-area: npcProfileImg;
+      max-height: 300px;
    }
-   .npcProfileSettings {
-      grid-area: npcProfileSettings;
+   .npcProfileImg img {
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      margin: auto;
+      overflow: hidden;
+   }
+   .npcProfileOptionsWrapper {
+      margin-top: 10px;
    }
    .abilities-dmgIRW {
-      grid-area: abilities-dmgIRW;
    }
 
    .traitCards {
