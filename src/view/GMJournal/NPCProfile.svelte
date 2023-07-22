@@ -14,7 +14,15 @@ export let elementRoot;
 const NPCArray = ui.KnowledgeRecalled?.npcActors
 console.log("Knowledge Recalled: View Array", NPCArray);
 
-const selectedNPC = NPCArray[0];
+let selectedNPC = NPCArray[0];
+function nextNPC() {
+   let index = NPCArray.indexOf(selectedNPC);
+   if (index < NPCArray.length - 1) {
+      selectedNPC = NPCArray[index + 1];
+   } else {
+      selectedNPC = NPCArray[0];
+   }
+}
 
 
 const NPCData = {
@@ -51,7 +59,7 @@ const NPCData = {
          <div class="npcProfileWrapper">
             <div class="row">
                <div class="infoHeader">
-                  <h2>{NPCData.baseInfo.name}</h2>
+                  <h2>{NPCData.baseInfo.name}</h2> <button on:click={nextNPC}>Next</button>
                   <!-- hard codded need to not hardcode -->
                   <ul class = "traitCards">
                      {#each NPCData.traits as trait}
