@@ -52,7 +52,7 @@ const NPCData = {
             <div class="infoHeader">
                <h2>{NPCData.baseInfo.name}</h2>
                <!-- hard codded need to not hardcode -->
-               <ul>
+               <ul class = "traitCards">
                   {#each NPCData.traits as trait}
                      <li>{trait.value}</li>
                   {/each}
@@ -65,20 +65,63 @@ const NPCData = {
                </ul>
             </div>
             <div class="npcProfileImg">
-               <img src={NPCData.baseInfo.img} alt="NPC Image">
+               <img src="{NPCData.baseInfo.img}" alt="NPC Image"/>
             </div>
             <div class="npcProfileSettings">
                <h3>Profile Settings</h3>
             </div>
             <div class="abilities-dmgIRW">
-               {#if NPCData.actionAbilities}
-                  <h3>Abilities</h3>
+               {#if NPCData.actionAbilities.length > 0}
+                  <div class = "actionAbilityWrapper">
+                     <h3>Abilities</h3>
+                     <ul class = "abilityCard">
+                        {#each NPCData.actionAbilities as ability}
+                           <li>
+                              <div class = "abilityCardHeader"> {ability.value} </div>
+                              <div class = "abilityCardDescription"> <textarea> {ability.description} </textarea></div>
+                           </li>
+                        {/each}
+                     </ul>
+                  </div>
                {/if}
-               {#if NPCData.attackAbilities}
-                  <h3>Attacks</h3>
+               {#if NPCData.passiveAbilities.length > 0 }
+                  <div class = "passiveAbilityWrapper">
+                     <h3>Passive Abilities</h3>
+                     <ul class = "abilityCard">
+                        {#each NPCData.passiveAbilities as ability}
+                           <li>
+                              <div class = "abilityCardHeader"> {ability.value} </div>
+                              <div class = "abilityCardDescription"> <textarea> {ability.description} </textarea></div>
+                           </li>
+                        {/each}
+                     </ul>
+                  </div>
                {/if}
-               {#if NPCData.spellAbilities}
-                  <h3>Spells</h3>
+               {#if NPCData.attackAbilities.length > 0}
+                  <div class = "attackAbilityWrapper">
+                     <h3>Attacks</h3>
+                     <ul class = "abilityCard">
+                        {#each NPCData.attackAbilities as ability}
+                           <li>
+                              <div class = "abilityCardHeader"> {ability.value} </div>
+                              <div class = "abilityCardDescription"> <textarea> {ability.description} </textarea></div>
+                           </li>
+                        {/each}
+                     </ul>
+                  </div>
+               {/if}
+               {#if NPCData.spellAbilities.length > 0}
+                  <div class = "spellAbilityWrapper">
+                     <h3>Spells</h3>
+                     <ul class = "abilityCard">
+                        {#each NPCData.spellAbilities as ability}
+                           <li>
+                              <div class = "abilityCardHeader"> {ability.value} </div>
+                              <div class = "abilityCardDescription"> <textarea> {ability.description} </textarea></div>
+                           </li>
+                        {/each}
+                     </ul>
+                  </div>
                {/if}
             </div>
          </div>
@@ -92,7 +135,7 @@ const NPCData = {
       grid-template-rows: 1fr 1fr 1fr;
       gap: 5px 5px;
       grid-template-areas:
-         "infoHeader infoheader npcProfileImg"
+         "infoHeader infoHeader npcProfileImg"
          "abilities-dmgIRW abilities-dmgIRW npcProfileSettings"
          "abilities-dmgIRW abilities-dmgIRW npcProfileSettings";
    }
@@ -107,5 +150,25 @@ const NPCData = {
    }
    .abilities-dmgIRW {
       grid-area: abilities-dmgIRW;
+   }
+
+   .traitCards {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: center;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+   }
+
+   .traitCards li {
+      padding: 2px;
+      margin: 2px;
+      border: 1px solid darkgoldenrod;
+      border-radius: 5px;
+      background-color: red;
+
    }
 </style>

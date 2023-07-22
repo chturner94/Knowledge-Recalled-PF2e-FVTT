@@ -69,7 +69,9 @@ Hooks.on('createActor', (actor) =>
 });
 
 /**
- *
+ *@function initNPCModel
+ * @param {Actor} actor
+ * @returns {NPCModel}
  */
 function initNPCModel(actor)
 {
