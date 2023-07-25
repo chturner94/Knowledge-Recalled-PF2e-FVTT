@@ -64,6 +64,11 @@ export default class NPCModel
             visibility: false,
             discoveredByPC: "",
          },
+         alignment: {
+            value: actor.alignment,
+            visibility: false,
+            discoveredByPC: "",
+         },
          privateInfo: {
             privateDescription: actor.system.details.privateNotes,
             CR: this.actor.level,

@@ -27,9 +27,11 @@ function nextNPC() {
 
 const NPCData = {
    baseInfo : selectedNPC.flags.baseCharacterInfo,
+   size: selectedNPC.flags.baseCharacterInfo.size,
    defaultDC : selectedNPC.flags.defaultDC,
    modified: selectedNPC.flags.modifiedDC,
    rarity: selectedNPC.flags.rarity,
+   alignment: selectedNPC.flags.alignment,
    privateInfo: selectedNPC.flags.privateInfo,
    traits: selectedNPC.flags.traits,
    armorClass: selectedNPC.flags.armorClass,
@@ -52,25 +54,28 @@ const NPCData = {
 // cycle through the array of NPCs with a selected NPC that is changed by a button
 
 // $ requires a store
-
+//350
 </script>
 <main>
    {#if NPCArray}
          <div class="npcProfileWrapper">
-            <div class="row">
+            <div class="row attributesRow">
                <div class="infoHeader">
                   <h2>{NPCData.baseInfo.name}</h2> <button on:click={nextNPC}>Next</button>
                   <!-- hard codded need to not hardcode -->
                   <ul class = "traitCards">
-                     {#each NPCData.traits as trait}
-                        <li>{trait.value}</li>
-                     {/each}
-                     {#if NPCData.baseInfo.creatureType}
-                        <li>{NPCData.baseInfo.creatureType}</li>
-                     {/if}
                      {#if NPCData.baseInfo.size}
-                        <li>{NPCData.baseInfo.size}</li>
+                        <li class="traitSize">{NPCData.baseInfo.size}</li>
                      {/if}
+                     {#if NPCData.baseInfo.alignment}
+                        <li class="traitAlignment">{NPCData.baseInfo.alignment}</li>
+                     {/if}
+                     {#if NPCData.baseInfo.creatureType}
+                        <li class="traitGeneric">{NPCData.baseInfo.creatureType}</li>
+                     {/if}
+                     {#each NPCData.traits as trait}
+                        <li class="traitGeneric">{trait.value}</li>
+                     {/each}
                   </ul>
                </div>
                <div class="abilities-dmgIRW">
@@ -128,7 +133,7 @@ const NPCData = {
                   {/if}
                </div>
             </div>
-            <div class="row">
+            <div class="row optionsRow">
                <div class="npcProfileImg">
                   <img src="{NPCData.baseInfo.actorImg}" alt="NPC Image">
                </div>
@@ -144,17 +149,27 @@ const NPCData = {
 </main>
 
 <style lang="scss">
+   $MaximumWidthOptionsRow: 350px;
+   @import "../../styles/variables.scss";
+
    .npcProfileWrapper {
       display: flex;
       flex-direction: row;
       column-gap: 10px;
       flex-grow: 1;
-   }
-   .row {
-      display: flex;
-      width: 50%;
-      flex-direction: column;
 
+      .row {
+         display: flex;
+         flex-direction: column;
+      }
+      .attributesRow {
+         flex-basis: 50%;
+         flex-grow: 2;
+      }
+      .optionsRow {
+         flex-basis: 50%;
+         max-width: $MaximumWidthOptionsRow;
+         }
    }
    .infoHeader {
       min-height: 100px;
@@ -189,9 +204,17 @@ const NPCData = {
    .traitCards li {
       padding: 2px;
       margin: 2px;
-      border: 1px solid darkgoldenrod;
+      border: 1px solid $gold;
+      color: white;
       border-radius: 5px;
-      background-color: red;
-
+   }
+   .traitAlignment {
+      background-color: $dark-blue;
+   }
+   .traitSize {
+      background-color: $green;
+   }
+   .traitGeneric {
+      background-color: $red;
    }
 </style>
