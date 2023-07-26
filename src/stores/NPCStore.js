@@ -1,6 +1,9 @@
 import {KnowledgeRecalledStore} from "./KnowledgeRecalledStore.js";
 import {readable, writable} from "svelte/store";
 import * as Utilities from "../API/FoundryMethods.js";
+import {TJSDocument} from "#runtime/svelte/store/fvtt/document";
+
+
 
 export default class NPCStore extends KnowledgeRecalledStore
 {
@@ -8,6 +11,7 @@ export default class NPCStore extends KnowledgeRecalledStore
    {
       super(...args);
       this.actor = Utilities.getActor(this.source);
+      this.actorStore = new TJSDocument(this.actor);
       this.defaultDC = readable({});
       this.modifiedDC = writable({});
       this.baseCharacterInfo = writable({});
