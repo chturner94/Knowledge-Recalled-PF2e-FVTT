@@ -65,16 +65,16 @@ const NPCData = {
                   <!-- hard codded need to not hardcode -->
                   <ul class = "traitCards">
                      {#if NPCData.baseInfo.size}
-                        <li class="traitSize">{NPCData.baseInfo.size}</li>
+                        <li class="traitSize">{NPCData.baseInfo.size.toUpperCase()}</li>
                      {/if}
                      {#if NPCData.baseInfo.alignment}
-                        <li class="traitAlignment">{NPCData.baseInfo.alignment}</li>
+                        <li class="traitAlignment">{NPCData.baseInfo.alignment.toUpperCase()}</li>
                      {/if}
                      {#if NPCData.baseInfo.creatureType}
-                        <li class="traitGeneric">{NPCData.baseInfo.creatureType}</li>
+                        <li class="traitGeneric">{NPCData.baseInfo.creatureType.toUpperCase()}</li>
                      {/if}
                      {#each NPCData.traits as trait}
-                        <li class="traitGeneric">{trait.value}</li>
+                        <li class="traitGeneric">{trait.value.toUpperCase()}</li>
                      {/each}
                   </ul>
                </div>
@@ -133,6 +133,7 @@ const NPCData = {
                   {/if}
                </div>
             </div>
+            <div class="columnGap">&nbsp;</div>
             <div class="row optionsRow">
                <div class="npcProfileImg">
                   <img src="{NPCData.baseInfo.actorImg}" alt="NPC Image">
@@ -149,7 +150,7 @@ const NPCData = {
 </main>
 
 <style lang="scss">
-   $MaximumWidthOptionsRow: 350px;
+   $MaximumWidthOptionsRow: 300px;
    @import "../../styles/variables.scss";
 
    .npcProfileWrapper {
@@ -170,6 +171,12 @@ const NPCData = {
          flex-basis: 50%;
          max-width: $MaximumWidthOptionsRow;
          }
+      .columnGap {
+         display: block;
+         width: 5px;
+         background-color: $red;
+         border: 1px solid $gold;
+      }
    }
    .infoHeader {
       min-height: 100px;
@@ -202,11 +209,11 @@ const NPCData = {
    }
 
    .traitCards li {
-      padding: 2px;
+      padding: 4px;
       margin: 2px;
-      border: 1px solid $gold;
+      border: 2px solid $gold;
       color: white;
-      border-radius: 5px;
+      font-size: 0.8em;
    }
    .traitAlignment {
       background-color: $dark-blue;
