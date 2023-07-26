@@ -10,6 +10,13 @@ import {DynReducerHelper} from "@typhonjs-fvtt/runtime/svelte/store/reducer";
 // let selectedNPC = npcArray ? npcArray[-1] : null;
 // console.log("KnowledgeRecalled: ", module, npcArray, selectedNPC);
 
+/*
+* Features: TODO
+*   - Create dropdown of lore skills for the selected PC.
+*     - Should auto select the skill that is associated with the NPC's creature type.
+*
+* */
+
 export let elementRoot;
 const NPCArray = ui.KnowledgeRecalled?.npcActors
 console.log("Knowledge Recalled: View Array", NPCArray);
