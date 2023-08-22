@@ -16,6 +16,6 @@ export function getActor(target)
    if (target instanceof Actor)
    { return target; }
    else
-   { return `KnowledgeRecalled: getActor() error: ${target} is not an Actor;`}
+   { return `KnowledgeRecalled: getActor() error: ${target} is not an Actor;` }
 
 }

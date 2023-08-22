@@ -1,9 +1,10 @@
-import { getUuid } from '../utils/uuid';
+import { getUuid } from "../API/FoundryMethods.js";
 
 const __STORES__ = new Map();
-default export class KnowledgeRecalledStore
+export class KnowledgeRecalledStore
 {
-   constructor(application, source) {
+   constructor(application, source)
+   {
       this.subscribers = [];
 
       this.application = application;
@@ -14,13 +15,14 @@ default export class KnowledgeRecalledStore
 
    static make(...args)
    {
-      const store = new this(...args)
+      const store = new this(...args);
       store.setupStores();
       store.setupSubscriptions();
       return store;
    }
 
-   setupStores() {
+   setupStores()
+   {
       // higher order implementation
    }
 

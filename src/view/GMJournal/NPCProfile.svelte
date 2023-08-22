@@ -1,7 +1,8 @@
 <script>
-import {setContext} from "svelte";
+   import {getContext, setContext} from "svelte";
 import {TJSDocument} from "#runtime/svelte/store/fvtt/document";
 import {DynReducerHelper} from "@typhonjs-fvtt/runtime/svelte/store/reducer";
+   import NPCStore from "../../stores/NPCStore.js";
 
 
 
@@ -18,10 +19,27 @@ import {DynReducerHelper} from "@typhonjs-fvtt/runtime/svelte/store/reducer";
 * */
 
 export let elementRoot;
+const application = getContext('#external');
+
+const NPCArrayTest = []
+function testNPCArray() {
+   const encounters = game.combats.combats;
+   const encounter = encounters[0];
+   const npcCombatants = encounter.turns;
+   npcCombatants.forEach((actor) =>
+   {
+      NPCArrayTest.push(actor);
+   })
+}
+testNPCArray()
+const testNPC = NPCArrayTest[0];
+
 const NPCArray = ui.KnowledgeRecalled?.npcActors
 console.log("Knowledge Recalled: View Array", NPCArray);
 
 let selectedNPC = NPCArray[0];
+export let store = NPCStore.make(application, testNPC);
+console.log("Knowledge Recalled: View Store", store);
 function nextNPC() {
    let index = NPCArray.indexOf(selectedNPC);
    if (index < NPCArray.length - 1) {

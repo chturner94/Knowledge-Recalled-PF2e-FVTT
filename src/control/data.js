@@ -19,4 +19,18 @@ export function removeFlag(object, flagPath)
    }
 }
 
+export function getFlag(object, flagPath)
+{
+   const flag = object.getFlag('fvtt-knowledge-recalled-pf2e', `${flagPath}`);
+   if (flag)
+   {
+      return flag;
+   }
+   else
+   {
+      console.log(`Knowledge Recalled Flag ${flagPath} does not exist on ${object.name}`);
+   }
+}
+{
 
+}
