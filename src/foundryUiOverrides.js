@@ -1,6 +1,9 @@
+import KnowledgeRecalled from "./KnowledgeRecalled";
+import ViewManager from "./control/ViewManager";
 import GMJournalApplication from "./view/GMJournal/GMJournalApplication";
 
 export default function registerUIOverrides() {
+    const viewManager = new ViewManager();
     Hooks.on('getSceneControlButtons', (controls) => {
         insertJournalbuttons(controls);
     })
@@ -20,7 +23,7 @@ export function insertKnowledgeRecalledbuttons(sceneControl) {
         title: 'KnowledgeRecalled',
         visible: true,
         toggle: true,
-        onClick: new GMJournalApplication().render(true, { focus: true }),
+        onClick: ViewManager.open("gmJournal"),
         button: true,
     });
 
