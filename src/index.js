@@ -14,7 +14,3 @@ Hooks.once("init", () => {
 });
 
 
-Hooks.on('getSceneControlButtons', (controls) => {
-    insertKnowledgeRecalledbuttons(controls);
-});
-
