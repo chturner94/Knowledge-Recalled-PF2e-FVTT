@@ -23,7 +23,7 @@ export function insertKnowledgeRecalledbuttons(sceneControl) {
         title: 'KnowledgeRecalled',
         visible: true,
         toggle: true,
-        onClick: ViewManager.open("gmJournal"),
+        onClick: () => { ui.KnowledgeRecalled.ViewManager.openCloseNegotiate("gmJournal") },
         button: true,
     });
 
