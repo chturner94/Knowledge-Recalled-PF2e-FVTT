@@ -159,4 +159,18 @@ export default class ViewManager {
             console.log(`Cannot find application ${name}, are you sure the application has been registered?`);
         };
     }
+    /**
+     * Method for manually setting and applications state, for use if opening and closing occurs outside of the managements
+     * open and close methods.
+     * @method
+     * @param {string} name - Application name setup when using the registerApplication method.
+     * @param {boolean} setAppsStateOpen - changes the value of ui.KnowledgeRecalled.ViewManager.appsState[name].open to the specified value
+     */
+    manuallyAlterStatesOpenValue(name, setAppsStateOpen) {
+        this.appsState[name] = {
+            ...this.appsState[name],
+            open: setAppsStateOpen
+        }
+    }
+
 }
