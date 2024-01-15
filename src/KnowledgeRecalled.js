@@ -1,9 +1,9 @@
 import ViewManager from "./control/ViewManager";
+import { getActiveEncounters } from "./control/utilities";
 
 
 // eslint-disable-next-line no-unused-vars
 export default class KnowledgeRecalled extends Application {
-    activeEncounters = [];
     constructor() {
         super();
     }
@@ -11,21 +11,12 @@ export default class KnowledgeRecalled extends Application {
     static _onReady() {
         ui.KnowledgeRecalled = new KnowledgeRecalled();
     }
-    /**
-    * Method to get and set all active encounters and store them at this.activeEncounters<Array>
-    * @method
-    * @description intended to fire during  appropriate hooks. Investigate appropriate hooks
-    */
-    getActiveEncounters() {
-        const encounters = game.combats.combats;
-        this.activeEncounters = [];
-        for (let index = 0; index < encounters.length; index++) {
-            const testEncounter = encounters[index];
-            if (testEncounter.isActive) {
-                this.activeEncounters.push(testEncounter)
-            }
-        }
+
+    populateGMJournal() {
+        const activeEncounters = getActiveEncounters();
+        console.log(activeEncounters);
     }
+
     // Depricate
     getActors() {
         return this.loadedNPCs;
