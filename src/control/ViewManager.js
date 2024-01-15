@@ -86,7 +86,7 @@ export default class ViewManager {
     open(name) {
         const app = this.getApp(name);
 
-        if (!this.appsState[name]?.open) {
+        if (!this.appsState[name].open) {
             this.appsState[name] = {
                 ...this.appsState[name],
                 open: true
@@ -106,7 +106,7 @@ export default class ViewManager {
         if (this.appsState[name].protected) {
             return console.error(`This Application, ${name}, is a protected application and can't be closed with this method.`)
         }
-        if (this.appsState[name]?.open) {
+        if (this.appsState[name].open) {
             this.appsState[name] = {
                 ...this.appsState[name],
                 open: false
