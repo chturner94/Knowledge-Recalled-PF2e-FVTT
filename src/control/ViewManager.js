@@ -142,4 +142,21 @@ export default class ViewManager {
             this.appsState[name].open = false;
         })
     }
+    /**
+     * Method to negotiate open or close behavior, based on the applications current state.
+     * Useful when a single method is intended to be supplied that should open and close
+     * the application, such as a button for opening and closing.
+     * @method
+     * @param {string} name - Application name setup when using the registerApplication method.
+     * @example openCloseNegotiate("gmJournal" | "playerJournal")
+     */
+    openCloseNegotiate(name) {
+        if (this.appsState[name].open) {
+            this.close(name);
+        } if (!this.appsState[name].open) {
+            this.open(name);
+        } else {
+            console.log(`Cannot find application ${name}, are you sure the application has been registered?`);
+        };
+    }
 }
