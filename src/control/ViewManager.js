@@ -1,6 +1,5 @@
 import { writable } from "svelte/store"
 import GMJournalApplication from "../view/GMJournal/GMJournalApplication"
-import AppService from "./AppService";
 
 export default class ViewManager {
     apps = {};
