@@ -32,8 +32,14 @@ export default class NPCManager {
         if (typeof actorOrId === Actor) {
             actor = actorOrId;
             actorId = actor.id;
+            if (!this.getActor(actorId)) {
+                this.registerActor(actor);
+            };
         }
         if (typeof actorOrId === "string") {
+            if (!this.getActor(actorId)) {
+                this.registerActor(actorOrId);
+            }
             actorId = actorOrId;
             actor = getActor(actorOrId);
         };
@@ -180,16 +186,22 @@ export default class NPCManager {
         const actor = getActor(actorId);
         const flags = actor.getFlag('fvtt-knowledge-recalled-pf2e', 'npcFlags');
         if (!flags) {
-            flags = this.initializeFlags(actor);
-            return flags;
+            console.debug('No flags initialized, please initialize this actor.')
         }
         else {
             return flags;
         }
     };
 
+    /**
+    * Method to set the flags on NPC Actor objects
+    * @method
+    * @param {Object} flags - flags listed in the initializeFlags methods
+    * @param {Actor} actor - Foundry Actor object.
+    */
     setFlags(flags, actor) {
-
+        actor.setFlag('fvtt-knowledge-recalled-pf2e', 'npcFlags', flags);
+        console.debug(`Set flags on ${actor.name}:`, flags, actor);
     }
 
     calculateDC() {
