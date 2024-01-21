@@ -1,6 +1,6 @@
 import { dcByLevel, rarityMap } from "../constants/constants"
 import { removeFlag } from "../control/data.js"
-import { getActor } from "../control/utilities";
+import { getActor, getProperty } from "../control/utilities";
 
 // If this is the manager, it should be independent of any actor, but we can register actors? and maybew
 // look them up based on their actorID?
@@ -31,7 +31,7 @@ export default class NPCManager {
         let actorId;
         if (typeof actorOrId === Actor) {
             actor = actorOrId;
-            actorId = actor.actorId;
+            actorId = actor.id;
         }
         if (typeof actorOrId === "string") {
             actorId = actorOrId;
@@ -44,7 +44,51 @@ export default class NPCManager {
             return console.debug(`Actor flags are already initialized for ${actorId}`, actor);
         }
         const flags = {
-
+            actorID: actor.id,
+            defaultDC: 0,
+            modifiedDC: 0,
+            baseCharacterInfo: {
+                visibility: false,
+                discoveredBy: '',
+            },
+            rarity: {
+                visibility: false,
+                discoveredBy: '',
+            },
+            privateInfo: {
+                visibility: false,
+                discoveredBy: '',
+            },
+            traits: {},
+            armorClass: {
+                visibility: false,
+                discoveredBy: '',
+            },
+            fortSave: {
+                visibility: false,
+                discoveredBy: '',
+            },
+            willSave: {
+                visibility: false,
+                discoveredBy: '',
+            },
+            refSave: {
+                visibility: false,
+                discoveredBy: '',
+            },
+            lowestSave: {
+                visibility: false,
+                discoveredBy: '',
+            },
+            immunities: {},
+            resistances: {},
+            weaknesses: {},
+            passiveAbilities: {},
+            actionAbilities: {},
+            spellAbilities: {},
+            difficultyAdjustmentByPlayerId: {
+                adjustment: {},
+            }
         };
         this.setFlags(flags, actor);
 
@@ -76,7 +120,7 @@ export default class NPCManager {
         let actorId;
         if (typeof actorOrId === Actor) {
             actor = actorOrId;
-            actorId = actor.actorId;
+            actorId = actor.id;
         } else {
             actorId = actorOrId;
             actor = getActor(actorId);
@@ -97,6 +141,38 @@ export default class NPCManager {
         }
 
         this.npcActors.set(actor.id, actor);
+
+    };
+
+    /**
+    * method for taking Actor object and changes diff, and updating the flags accordingly, intended to be attached
+    * to the updateActor hook, and returns both the actor and the diff.
+    * @method
+    * @param {Actor} actor - actor object, can resolve if string of id is passed
+    * @param {Object} diff - value passed by the updateActor hook as a diff of the changed values.
+    * @returns {void} Updates flags on object
+    */
+    updateDiff(actor, diff) {
+        if (typeof actor === 'string') {
+            try {
+                actor = getActor(actor);
+            } catch (error) {
+                return console.error(`Invalid actor or actorId`, error)
+            };
+        };
+        const actorId = actor.id;
+        for (let [key, value] of Object.entries(diff)) {
+            // If value is an object call recursively
+            if (typeof value === 'object') {
+                this.updateDiff(actor, value);
+            } else {
+                let flag = this.getFlags(actorId);
+                if (flag[key]) {
+                    flag.value = getProperty(actor, key);
+                }
+            }
+        }
+
 
     }
 
